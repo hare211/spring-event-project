@@ -31,5 +31,33 @@ public interface EventDetailRepository extends JpaRepository<EventDetailEntity, 
 	
 	@Query(value = "SELECT CEIL(COUNT(*) / 12.0) FROM event_detail e JOIN content c ON e.content_id = c.content_id WHERE c.cat2 = 'A0208' AND e.infoname = '행사소개'", nativeQuery = true)
 	int countEventListTotalPage();
+	
+	@Query(value = "SELECT " +
+	        "e.content_id AS content_id, " +
+	        "e.event_startdate AS event_startdate, " +
+	        "e.event_enddate AS event_enddate, " +
+	        "e.sponsor1 AS sponsor1, " +
+	        "e.sponsor2 AS sponsor2, " +
+	        "e.playtime AS playtime, " +
+	        "e.charge AS charge, " +
+	        "e.spendtime AS spendtime, " +
+	        "e.agelimit AS agelimit, " +
+	        "e.price AS price, " +
+	        "e.price_info AS price_info, " +
+	        "c.title AS title, " +
+	        "c.addr1 AS addr1, " +
+	        "c.first_image AS first_image, " +
+	        "c.mapy AS mapy, " +
+	        "c.mapx AS mapx, " +
+	        "c.tel AS tel, " +
+	        "d.info_id AS info_id, " +
+	        "d.infoname AS infoname, " +
+	        "d.infotext AS infotext " +
+	        "FROM event e " +
+	        "JOIN content c ON e.content_id = c.content_id " +
+	        "JOIN event_detail d ON e.content_id = d.content_id " +
+	        "WHERE e.content_id = :content_id", nativeQuery = true)
+	List<EventDetailProjection> findEventDetailByContentId(@Param("content_id") int contentId);
+	
 
 }
