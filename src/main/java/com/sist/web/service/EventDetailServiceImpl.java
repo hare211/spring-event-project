@@ -2,6 +2,7 @@ package com.sist.web.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sist.web.dao.EventDetailRepository;
@@ -18,6 +19,18 @@ public class EventDetailServiceImpl implements EventDetailService {
 	public List<EventDetailProjection> getEventDetails() {
 		
 		return eDao.findEventDetailLimited();
+	}
+	
+	@Override
+	public List<EventDetailProjection> getPagedEventList(Pageable pageable) {
+		int limit = pageable.getPageSize();
+		int offset = pageable.getPageNumber() * limit;
+		return eDao.findPagedEventDetails(limit, offset);
+	}
+	
+	@Override
+	public int getEventListTotalPage() {
+		return eDao.countEventListTotalPage();
 	}
 
 }
