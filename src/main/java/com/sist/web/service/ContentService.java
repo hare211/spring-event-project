@@ -6,4 +6,5 @@ import com.sist.web.entity.ContentEntity;
 
 public interface ContentService {
 	List<ContentEntity> getContentList();
+	List<ContentEntity> getTodayContentList();
 }

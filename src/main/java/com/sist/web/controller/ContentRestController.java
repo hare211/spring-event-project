@@ -30,4 +30,15 @@ public class ContentRestController {
 		}
 		return list;
 	}
+	
+	@GetMapping("/today")
+	public List<ContentEntity> getTodayContentList() {
+		List<ContentEntity> list = new ArrayList<>();
+		try {
+			list = cService.getTodayContentList();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
 }

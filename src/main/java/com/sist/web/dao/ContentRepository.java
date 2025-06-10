@@ -11,5 +11,5 @@ import com.sist.web.entity.ContentEntity;
 @Repository
 public interface ContentRepository extends JpaRepository<ContentEntity, Integer>{
 	@Query(value = "SELECT * FROM content WHERE cat2 = 'A0208' ORDER BY content_id DESC limit 12", nativeQuery = true)
-	public List<ContentEntity> selectContentList();
+	List<ContentEntity> selectContentList();
 }

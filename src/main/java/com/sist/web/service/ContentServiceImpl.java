@@ -25,4 +25,17 @@ public class ContentServiceImpl implements ContentService{
 		}
 		return list;
 	}
+	
+	@Override
+	public List<ContentEntity> getTodayContentList() {
+		List<ContentEntity> list = new ArrayList<>();
+		try {
+			for (int i = 0; i < 3; i++) {
+				list.add(cDao.selectContentList().get(i));
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
 }
